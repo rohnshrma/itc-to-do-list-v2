@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express")
 const app = express();
 const bodyParser = require("body-parser")
@@ -7,7 +8,7 @@ const mongoose = require("mongoose")
 
 const router = require("./routes/routes")
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 
 
@@ -27,7 +28,7 @@ app.use(router)
 
 
 
-mongoose.connect("mongodb://localhost:27017/itc-tdlDB")
+mongoose.connect(`mongodb+srv://Admin-Rohan:${process.env.MONGO_PASS}@cluster0.2vxj1.mongodb.net/itc-tdlDB`)
 .then(()=>{
     console.log("Connected to DB");
     app.listen(PORT,()=>{
@@ -37,5 +38,7 @@ mongoose.connect("mongodb://localhost:27017/itc-tdlDB")
 .catch((err)=>{
     console.log(err);
 })
+
+
 
 
